@@ -1,0 +1,20 @@
+<form name="editForm" ng-submit="service">
+    Type Of Sales:
+    <br>
+    <input type="text" name="typeOfSales" ng-model="model.typeOfSales" required>
+    <span ng-if="!editForm.typeOfSales.$valid">Please fill out this field</span>
+    <br> Booking Text:
+    <br>
+    <input type="text" name="bookingText" ng-model="model.bookingText" required>
+    <span ng-if="!editForm.bookingText.$valid">Please fill out this field</span>
+    <br> Date:
+    <br>
+    <input type="date" name="date" placeholder="YYYY-MM-DD" ng-model="model.date" required>
+    <br> Amount:
+    <br>
+    <input type="text" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="model.amount" min="50" max="20000000"
+        required>
+    <span ng-if="!editForm.amount.$valid">Please enter a valid amount</span>
+    <br>
+    <button type="submit">Save</button>
+</form>

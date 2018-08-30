@@ -1,7 +1,7 @@
 import angular = require('angular')
-import todosVisible from './todosVisible'
+import shortenText from './shortenText'
 
 export default angular
   .module('filters', [])
-  .filter('todosVisible', () => todosVisible)
+  .filter('shortenText', () => shortenText)
   .name

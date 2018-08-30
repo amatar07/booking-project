@@ -1,16 +1,27 @@
-import { BOOKING_DATA } from '../../constants/defines';
 
 
 export default class HomeCtrl {
 
-  bookingData = BOOKING_DATA;
-  sortColumn = "amount";
-  reverseSort = false;
+  static $inject = ['log', '$state']
 
-  constructor(private log) {
-    console.log(this.bookingData);
+  bookingData: any = [];
+  sortColumn: string = "amount";
+  reverseSort: boolean = true;
+
+  constructor(private log, private $state) {
+    if (this.log.bookingData.length<1) {
+      this.log.getData().then((response) => {
+        this.bookingData = response;
+
+      });
+    } else {
+      this.bookingData = this.log.bookingData;
+    }
   }
-
+  navigateEdit(item): void {
+    this.log.setCurrentItem(item);
+    this.$state.go('itemEdit', { id: item.id });
+  }
 
 
   editItem(item, index): void {
@@ -37,16 +48,8 @@ export default class HomeCtrl {
   }
 
   sortData(column) {
-    console.log(column);
     this.reverseSort = (this.sortColumn == column) ? !this.reverseSort : false;
     this.sortColumn = column;
-  }
-
-  sortByDate(): void {
-
-  }
-  sortByAmount(): void {
-
   }
 }
 
