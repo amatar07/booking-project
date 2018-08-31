@@ -1,9 +1,19 @@
-<div class="root">
-    <h1>Booking Application</h1>
-    <ul class="tabs">
-        <li>
-            <a ui-sref="home" ui-sref-active="active">Home</a>
-        </li>
-    </ul>
-    <div ui-view class="view"></div>
+<div class="main-container container">
+        <nav class="navbar navbar-default">
+            <div>
+                <div class="navbar-header">
+                    <a class="navbar-brand">Booking Application</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="menu-button" ui-sref="home" ui-sref-active="active">
+                            <a>Home</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <div ui-view class="view"></div>
 </div>
