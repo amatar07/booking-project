@@ -1,20 +1,27 @@
-<form name="editForm" ng-submit="service">
-    Type Of Sales:
-    <br>
-    <input type="text" name="typeOfSales" ng-model="model.typeOfSales" required>
-    <span ng-if="!editForm.typeOfSales.$valid">Please fill out this field</span>
-    <br> Booking Text:
-    <br>
-    <input type="text" name="bookingText" ng-model="model.bookingText" required>
-    <span ng-if="!editForm.bookingText.$valid">Please fill out this field</span>
-    <br> Date:
-    <br>
-    <input type="date" name="date" placeholder="YYYY-MM-DD" ng-model="model.date" required>
-    <br> Amount:
-    <br>
-    <input type="text" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="model.amount" min="50" max="20000000"
-        required>
-    <span ng-if="!editForm.amount.$valid">Please enter a valid amount</span>
-    <br>
-    <button type="submit">Save</button>
+<form class="col-md-5" name="editForm" ng-submit="service">
+    <div class="form-group">
+        <label>Type Of Sales</label>
+        <input type="text" class="form-control" name="typeOfSales" placeholder="Type Of Sales" ng-model="model.typeOfSales" required>
+        <span ng-if="!editForm.typeOfSales.$valid">Please fill out this field</span>
+    </div>
+
+    <div class="form-group">
+        <label>Booking Text</label>
+        <input type="text" class="form-control" name="bookingText" placeholder="Booking Text" ng-model="model.bookingText" required>
+        <span ng-if="!editForm.bookingText.$valid">Please fill out this field</span>
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input type="date" class="form-control" name="date" ng-model="model.date" required>
+    </div>
+
+    <div class="form-group">
+        <label>Amount</label>
+        <input type="text" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="model.amount" required>
+        <span ng-if="!editForm.amount.$valid">Please enter a valid amount</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirm</button>
+    <button ui-sref="home" class="btn btn-warning">Cancel</button>
+
 </form>
