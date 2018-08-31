@@ -2,24 +2,24 @@
 
 export default class HomeCtrl {
 
-  static $inject = ['log', '$state']
+  static $inject = ['bookingService', '$state']
 
   bookingData: any = [];
   sortColumn: string = "amount";
   reverseSort: boolean = true;
 
-  constructor(private log, private $state) {
-    if (this.log.bookingData.length<1) {
-      this.log.getData().then((response) => {
+  constructor(private bookingService, private $state) {
+    if (this.bookingService.bookingData.length<1) {
+      this.bookingService.getData().then((response) => {
         this.bookingData = response;
 
       });
     } else {
-      this.bookingData = this.log.bookingData;
+      this.bookingData = this.bookingService.bookingData;
     }
   }
   navigateEdit(item): void {
-    this.log.setCurrentItem(item);
+    this.bookingService.setCurrentItem(item);
     this.$state.go('itemEdit', { id: item.id });
   }
 

@@ -1,4 +1,4 @@
-class Log {
+class BookingService {
   bookingData: any = [];
   static $inject = ['$http'];
   currentItem: any;
@@ -30,4 +30,4 @@ class Log {
   }
 }
 
-export default Log
+export default BookingService

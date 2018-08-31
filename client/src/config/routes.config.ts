@@ -1,6 +1,6 @@
 const routePathes: Array<string> = [
   'home',
-  'todo-list'
+  'item-edit'
 ]
 
 let routes: Array<object> = []
