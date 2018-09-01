@@ -3,29 +3,28 @@
 
     <div class="form-group">
         <label>Type Of Sales</label>
-        <input type="text" class="form-control" name="typeOfSales" placeholder="Type Of Sales" ng-model="itemCopy.typeOfSales" required>
-        <span ng-if="!editForm.typeOfSales.$valid">Please fill out this field</span>
+        <input type="text" class="form-control" ng-change="validateFields('typeOfSales')" ng-focus="validateFields('typeOfSales')" name="typeOfSales" placeholder="type of sales" ng-model="itemCopy.typeOfSales" required>
+        <span class = "error-message" ng-if="!validTypeOfSales">*Please fill out this field</span>
     </div>
 
     <div class="form-group">
         <label>Booking Text</label>
-        <input type="text" class="form-control" name="bookingText" placeholder="Booking Text" ng-model="itemCopy.bookingText" required>
-        <span ng-if="!editForm.bookingText.$valid">Please fill out this field</span>
+        <input type="text" class="form-control" name="bookingText" placeholder="booking text" ng-model="itemCopy.bookingText" required>
+        <span class = "error-message" ng-if="!editForm.bookingText.$valid">*Please fill out this field</span>
     </div>
     <div class="form-group">
         <label>Date</label>
-        <input type="text" class="form-control" placeholder="Date format DD.MM.YYYY" ng-pattern='/^(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}$/'name="date" ng-model="itemCopy.date" required> 
-        <span ng-if="!editForm.date.$valid">Please enter a valid date 'dd.mm.yyyy'</span>
+        <input type="text" class="form-control" placeholder="date format DD.MM.YYYY" ng-pattern='/^(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}$/'name="date" ng-model="itemCopy.date" required> 
+        <span class = "error-message" ng-if="!editForm.date.$valid">*Please enter a valid date 'dd.mm.yyyy'</span>
 
     </div>
 
     <div class="form-group">
         <label>Amount</label>
-        <input type="text" class="form-control" placeholder="Amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="itemCopy.amount" required>
-        <span ng-if="!editForm.amount.$valid">Please enter a valid amount</span>
+        <input type="text" class="form-control" placeholder="amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="itemCopy.amount" required>
+        <span class = "error-message" ng-if="!editForm.amount.$valid">*Please enter a valid amount</span>
     </div>
-
-    <button type="submit" class="btn btn-primary">Confirm</button>
+    <button type="submit" ng-disabled="!editForm.$valid" class="btn btn-primary">Confirm</button>
     <button ui-sref="home" class="btn btn-warning">Cancel</button>
 
 </form>

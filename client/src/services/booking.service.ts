@@ -2,7 +2,8 @@ class BookingService {
   bookingData: any = [];
   static $inject = ['$http'];
   currentItem: any;
-  constructor(private $http: ng.IHttpService) { }
+  constructor(private $http: ng.IHttpService) {
+  }
 
   info(info) {
     alert(info)
@@ -11,6 +12,21 @@ class BookingService {
   submitEditItem(item) {
     let findItemIndex = this.bookingData.findIndex(e => e.id == item.id);
     this.bookingData[findItemIndex] = item;
+  }
+
+  submitAddItem(item) {
+    let maxValueId = this.getMaxIdPlusOne(this.bookingData, 'id');
+    item.id = maxValueId;
+    this.bookingData.push(item);
+  }
+
+  getMaxIdPlusOne(arr, prop) {
+    var max;
+    for (var i = 0; i < arr.length; i++) {
+      if (!max || parseInt(arr[i][prop]) > parseInt(max[prop]))
+        max = arr[i];
+    }
+    return max.id + 1;
   }
 
   deleteItem(selectedItem): void {
