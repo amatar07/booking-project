@@ -2,46 +2,45 @@
 
   <!-- <a ui-sref="home.view1">view1</a>
   <div ui-view></div> -->
- 
-<!-- Search form -->
 
-<div class="form-group row">
+  <!-- Search form -->
+
+  <div class="form-group row">
 
     <div class="col-xs-3">
-      <input class="form-control" type="text" placeholder="Search by booking field..">
+      <input ng-model="searchKeyword" class="form-control" type="text" placeholder="Type to search...">
     </div>
     <div class="col-xs-7">
-        <button class = "add-button btn btn-success pull-right">Add New</button>
-      </div>
+      <button class="add-button btn btn-success pull-right" ui-sref="itemAdd">Add New</button>
+    </div>
 
 
   </div>
 
 
-  
   <table class="table table-striped">
     <tr>
       <th>Number</th>
       <th>Sales</th>
       <th>Booking</th>
-      <th class = "click-header" ng-click="$ctrl.sortData('date')">
+      <th class="click-header" ng-click="$ctrl.sortData('date')">
         <div ng-class="$ctrl.getSortClass('date')">Date
           <span ng-show="$ctrl.sortColumn == 'date'" class="sortorder" ng-class="{reverse:$ctrl.reverseSort}"></span>
         </div>
       </th>
-      <th class = "click-header" ng-click="$ctrl.sortData('amount')">
+      <th class="click-header" ng-click="$ctrl.sortData('amount')">
         <div ng-class="$ctrl.getSortClass('amount')">Amount
           <span ng-show="$ctrl.sortColumn == 'amount'" class="sortorder" ng-class="{reverse:$ctrl.reverseSort}"></span>
         </div>
       </th>
       <th>Actions</th>
     </tr>
-    <tr ng-repeat="item in $ctrl.bookingData | orderBy:$ctrl.sortColumn:$ctrl.reverseSort">
+    <tr ng-repeat="item in $ctrl.bookingData | orderBy:$ctrl.sortColumn:$ctrl.reverseSort | filter: searchKeyword ">
       <td>{{$index+1}}</td>
       <td>{{item.typeOfSales}}</td>
       <td>{{item.bookingText | shortenText}}</td>
       <td>{{item.date | date: 'dd.MM.yyyy'}}</td>
-      <td>{{item.amount | currency:'€'}}</td>
+      <td>{{item.amount | currency}}</td>
       <td>
         <button class="action-button btn-sm btn-warning" ng-click="$ctrl.navigateEdit(item)">Edit</button>
         <button class="action-button btn-sm btn-danger" ng-click="$ctrl.deleteItem(item, $index)">Delete</button>

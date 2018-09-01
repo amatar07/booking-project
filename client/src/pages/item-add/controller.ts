@@ -1,5 +1,5 @@
 
-export default class ItemEditCtrl {
+export default class ItemAddCtrl {
   static $inject = ['bookingService', '$filter', '$state']
 
   currentItem: any;
@@ -11,8 +11,8 @@ export default class ItemEditCtrl {
 
   }
 
-  submitEditItem() {
-    this.bookingService.submitEditItem(this.currentItem);
+  submitAddItem() {
+    this.bookingService.submitAddItem(this.currentItem);
     this.$state.go('home');
   }
 }

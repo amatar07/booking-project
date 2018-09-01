@@ -9,7 +9,7 @@ export default class HomeCtrl {
   reverseSort: boolean = true;
 
   constructor(private bookingService, private $state) {
-    if (this.bookingService.bookingData.length<1) {
+    if (this.bookingService.bookingData.length < 1) {
       this.bookingService.getData().then((response) => {
         this.bookingData = response;
 
@@ -23,17 +23,9 @@ export default class HomeCtrl {
     this.$state.go('itemEdit', { id: item.id });
   }
 
+  deleteItem(selectedItem): void {
 
-  editItem(item, index): void {
-
-  }
-
-  deleteItem(selectedItem, index): void {
-
-    var filtered = this.bookingData.filter(function (item) {
-      return item.id !== selectedItem.id;
-    });
-    this.bookingData = filtered;
+    this.bookingService.deleteItem(selectedItem);
   }
 
   getSortClass(column) {

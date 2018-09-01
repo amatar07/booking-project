@@ -1,23 +1,27 @@
-<form class="col-md-5" name="editForm" ng-submit="service">
+
+<form  class="col-md-5" name="editForm" ng-click="submitItem()" ng-submit="service()">
+
     <div class="form-group">
         <label>Type Of Sales</label>
-        <input type="text" class="form-control" name="typeOfSales" placeholder="Type Of Sales" ng-model="model.typeOfSales" required>
+        <input type="text" class="form-control" name="typeOfSales" placeholder="Type Of Sales" ng-model="itemCopy.typeOfSales" required>
         <span ng-if="!editForm.typeOfSales.$valid">Please fill out this field</span>
     </div>
 
     <div class="form-group">
         <label>Booking Text</label>
-        <input type="text" class="form-control" name="bookingText" placeholder="Booking Text" ng-model="model.bookingText" required>
+        <input type="text" class="form-control" name="bookingText" placeholder="Booking Text" ng-model="itemCopy.bookingText" required>
         <span ng-if="!editForm.bookingText.$valid">Please fill out this field</span>
     </div>
     <div class="form-group">
         <label>Date</label>
-        <input type="date" class="form-control" name="date" ng-model="model.date" required>
+        <input type="text" class="form-control" placeholder="Date format DD.MM.YYYY" ng-pattern='/^(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}$/'name="date" ng-model="itemCopy.date" required> 
+        <span ng-if="!editForm.date.$valid">Please enter a valid date 'dd.mm.yyyy'</span>
+
     </div>
 
     <div class="form-group">
         <label>Amount</label>
-        <input type="text" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="model.amount" required>
+        <input type="text" class="form-control" placeholder="Amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" name="amount" ng-model="itemCopy.amount" required>
         <span ng-if="!editForm.amount.$valid">Please enter a valid amount</span>
     </div>
 

@@ -9,9 +9,13 @@ class BookingService {
   }
 
   submitEditItem(item) {
-    console.log("get here")
-    let findItem = this.bookingData.find(e => e.id == item.id);
-    findItem = item;
+    let findItemIndex = this.bookingData.findIndex(e => e.id == item.id);
+    this.bookingData[findItemIndex] = item;
+  }
+
+  deleteItem(selectedItem): void {
+    let findItemIndex = this.bookingData.findIndex(e => e.id == selectedItem.id);
+    this.bookingData.splice(findItemIndex, 1);
   }
 
   setCurrentItem(item) {
