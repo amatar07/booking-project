@@ -1,14 +1,14 @@
 let path = require('path'),
   webpack = require('webpack'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'), //css单独打包
+  ExtractTextPlugin = require('extract-text-webpack-plugin'), 
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const ROOT_PATH = path.resolve(__dirname), //项目根目录
-  APP_PATH = path.resolve(ROOT_PATH, 'src'), //项目源代码目录
-  BUILD_PATH = path.resolve(ROOT_PATH, 'dist'), //发布文件存放目录
-  NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'), //node_modules目录
-  ENTRY_FILE = path.resolve(APP_PATH, 'index'), //入口文件地址
-  TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); //html模板文件地址
+const ROOT_PATH = path.resolve(__dirname), 
+  APP_PATH = path.resolve(ROOT_PATH, 'src'), 
+  BUILD_PATH = path.resolve(ROOT_PATH, 'dist'), 
+  NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules'), 
+  ENTRY_FILE = path.resolve(APP_PATH, 'index'), 
+  TEMPLATE_FILE = path.resolve(APP_PATH, 'index.html'); 
 
 
 module.exports = {
@@ -20,8 +20,8 @@ module.exports = {
     ]
   },
   output: {
-    path: BUILD_PATH, //编译到当前目录
-    filename: 'js/[name].[hash:8].js', //编译后的文件名字
+    path: BUILD_PATH, 
+    filename: 'js/[name].[hash:8].js', 
     chunkFilename: 'js/[name].[chunkhash:8].js'
   },
   module: {
@@ -70,7 +70,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 8192, //limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+            limit: 8192, 
             name: 'images/[name].[hash:8].[ext]'
           }
         },
@@ -87,17 +87,17 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production') //定义生产环境
+        NODE_ENV: JSON.stringify('production') 
       }
     }),
-    new HtmlWebpackPlugin({  //根据模板插入css/js等生成最终HTML
-      filename: path.resolve(BUILD_PATH, 'index.html'), //生成的html存放路径
-      template: TEMPLATE_FILE, //html模板路径
+    new HtmlWebpackPlugin({  
+      filename: path.resolve(BUILD_PATH, 'index.html'), 
+      template: TEMPLATE_FILE, 
       hash: false,
     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
-        comments: false, // 移除所有注释
+        comments: false, 
       },
       compress: {
         warnings: false,
@@ -114,6 +114,6 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.ts', '.less', '.scss', '.css'] //后缀名自动补全
+    extensions: ['.js', '.ts', '.less', '.scss', '.css'] 
   }
 };
