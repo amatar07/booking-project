@@ -2,6 +2,9 @@ import html from './index.html'
 import './index.scss'
 import angular = require('angular')
 
+/**
+ * Creating a generic form with a dynamic callback submit button
+ */
 export default class ItemFormDirective {
 
   template = html
@@ -14,13 +17,14 @@ export default class ItemFormDirective {
 
   link(scope, elem, attr) {
 
+    // fields for validation
     scope.validTypeOfSales = true;
     scope.validBookingText = true;
     scope.validDate = true;
     scope.validAmount = true;
-    scope.customMessageAmount = "*Please enter a valid number"
-    scope.customMessageDate = "*Please enter a valid format 'dd.mm.yyyy'"
-
+    scope.customMessageAmount = '*Please enter a valid number format x,xxx.xx';
+    scope.customMessageDate = "*Please enter a valid format 'dd.mm.yyyy'";
+    // changing scope till user clicks confirm to avoid two way binding
     scope.itemCopy = angular.copy(scope.item);
     scope.submitItem = function (a) {
 
@@ -29,6 +33,10 @@ export default class ItemFormDirective {
       }
     }
 
+    /**
+     * Validating all fields in the form based on input name
+     * @field input name for the text field
+     */
     scope.validateFields = function (field) {
       switch (field) {
         case "typeOfSales": {
@@ -54,7 +62,10 @@ export default class ItemFormDirective {
       }
     }
 
-
+    /**
+     * Validating type of sales field
+     * condition for initial check only
+     */
     scope.validateTypeOfSales = function () {
       if (scope.editForm.typeOfSales.$valid) {
         scope.validTypeOfSales = true;
@@ -63,6 +74,10 @@ export default class ItemFormDirective {
       }
     }
 
+    /**
+     * Validating booking text field
+     * condition for initial check only
+     */
     scope.validateBookingText = function () {
 
       if (scope.editForm.bookingText.$valid) {
@@ -72,34 +87,37 @@ export default class ItemFormDirective {
       }
     }
 
+    /**
+     * Date validation
+     * being greater than 1900
+     * not a future or a current date with custom messages
+     * matching pattern xx.xx.xxxx
+     */
     scope.validateDate = function () {
 
       let tempDate = new Date();
-      console.log(tempDate);
+      tempDate.setHours(0, 0, 0, 0)
 
-      console.log(tempDate.getDate(), 'mponth' ,tempDate.getMonth(), tempDate.getFullYear());
       let isValid = true;
       if (scope.editForm.date.$valid) {
 
         let dateYear;
-        if (scope.editForm.date.$viewValue) {
-          let date = scope.editForm.date.$viewValue.split(".");
-          if (date[2]) {
-            dateYear = date[2];
-          }
-        }
+        let date;
+        date = scope.editForm.date.$viewValue.split(".");
+        dateYear = date[2];
 
-        if (dateYear < 1900) {
+        if (dateYear <= 1900) {
           scope.customMessageDate = "*Date must be after 1900";
           isValid = false;
-        } else if (dateYear){
-          //let day = getDate();
-          console.log('hello ', tempDate);
-        }
-          else if (dateYear > 20000000) {
-          scope.customMessageDate = "*Maximum amount is 20000000";
-          isValid = false;
+        } else if (scope.editForm.date.$viewValue) {
+          let newDate = new Date(date[2], date[1] - 1, date[0]);
+          newDate.setHours(0, 0, 0, 0)
 
+          if (newDate >= tempDate) {
+            scope.customMessageDate = "*Date cannot be equal to or more than current date";
+            isValid = false;
+
+          }
         } else {
           isValid = true;
         }
@@ -111,7 +129,11 @@ export default class ItemFormDirective {
 
     }
 
-
+    /**
+     * validating amount 
+     * greater than 50 and less than 20,000,000
+     * matching pattern xx,xxx.xx
+     */
     scope.validateAmount = function () {
 
       let amount;
@@ -133,7 +155,7 @@ export default class ItemFormDirective {
           isValid = true;
         }
       } else {
-        scope.customMessageAmount = "*Please enter a valid number"
+        scope.customMessageAmount = "*Please enter a valid number format x,xxx.xx"
         isValid = false;
       }
       scope.validAmount = isValid;

@@ -6,6 +6,9 @@ const routePathes: Array<string> = [
 
 let routes: Array<object> = []
 
+/**
+ * Route registration for all pages in detected in folder
+ */
 routePathes.forEach(path => {
   const parentRoutes = require(`../pages/${path}/route`).default
   const { children } = parentRoutes

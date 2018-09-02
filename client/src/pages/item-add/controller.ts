@@ -7,7 +7,9 @@ export default class ItemAddCtrl {
   constructor(private bookingService, private $state) {
 
   }
-
+/**
+ * navigating to home after submitting an item
+ */
   submitAddItem() {
     this.bookingService.submitAddItem(this.currentItem);
     this.$state.go('home');

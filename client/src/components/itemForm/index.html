@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <label>Amount</label>
-        <input type="text" class="form-control" ng-change="validateFields('amount')" ng-focus="validateFields('amount')" placeholder="amount" ng-pattern="/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/" name="amount" ng-model="itemCopy.amount" required>
+        <input type="text" class="form-control" ng-change="validateFields('amount')" ng-focus="validateFields('amount')" placeholder="amount" ng-pattern="/^-?(?:\d+|\d{1,3}(?:(\,)\d+)+)(?:(\.)\d{1,2})?$/" name="amount" ng-model="itemCopy.amount" required>
         <span class = "error-message" ng-if="!validAmount">{{customMessageAmount}}</span>
     </div>
     <button type="submit" ng-disabled="!(editForm.$valid && validAmount && validDate)" class="btn btn-primary">Confirm</button>
